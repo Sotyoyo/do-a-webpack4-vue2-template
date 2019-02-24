@@ -49,7 +49,7 @@
 
   > 注意，如果使用了 babel-loader 7.x，那么在rules中一定要指定presets
 
-  ```json
+  ```javascript
   {
       test: /\.js$/,
       loader: 'babel-loader',
