@@ -1,4 +1,4 @@
-## 本项目的几个分支 
+## 本项目的几个分支
 
 - `branch_simple_v01 `
 
@@ -24,8 +24,40 @@
 
 ## 目前进展
 
-- `branch_simple_v01` 
+- `branch_simple_v01`
 
   Coding:  1.0 finished  *2019年02月23日21:51:03*
 
-  Document: 1.0 doing 
+  Document: 1.0 doing
+
+##  文档
+- 见我的segmentfault 文章。
+
+- babel-loader Install
+
+  > webpack 4.x | babel-loader 8.x | babel 7.x
+
+  ```node
+  npm install -D babel-loader @babel/core @babel/preset-env webpack
+  ```
+
+  > webpack 4.x | babel-loader 7.x | babel 6.x
+
+  ```node
+  npm install -D babel-loader@7 babel-core babel-preset-env webpack
+  ```
+
+  > 注意，如果使用了 babel-loader 7.x，那么在rules中一定要指定presets
+
+  ```json
+  {
+      test: /\.js$/,
+      loader: 'babel-loader',
+      options: {
+        presets: ['babel-preset-env']
+      }
+  }
+  ```
+
+
+

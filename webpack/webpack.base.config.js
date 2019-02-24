@@ -1,43 +1,53 @@
-'use strict'
-const path = require('path')
-const config = require('./config')
-
+const path = require("path")
 const { VueLoaderPlugin } = require('vue-loader')
+const ifProd = process.env.NODE_ENV === 'production' ? true : false
+
+const config = {
+  dev: {
+    mode: 'development',
+    assetsPublcPath: '/'
+  },
+  prod: {
+    mode: 'production',
+    index: path.resolve(__dirname, "../dist/index.html"),
+    assetsPublcPath: path.resolve(__dirname, "../dist"),
+  }
+}
 
 module.exports = {
-  // The base directory, an absolute path, for resolving entry points and loaders from configuration
+  mode: ifProd ? 'production' : 'development',
   context: path.resolve(__dirname, '../'),
-  // 入口
   entry: {
-      app: './src/main.js'
+    app: './src/main.js'
   },
-  // build的出口
   output: {
-    path: config.build.assetsRoot,
-    filename: '[name].bundle.[hash:10].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    filename: '[name].bulde.[hash:10].js',
+    path: ifProd ? config.prod.assetsPublcPath : config.dev.assetsPublcPath
   },
   resolve: {
     extensions: ['.js', '.vue'],
-    alias: {
-      '@': path.resolve(__dirname, '../src'),
-    }
   },
-  // 1. vue-loader vue-template-compiler
-  // 2. webpack.config 中添加rules loader .vue文件
-  // 3. webpack.config 中添加plugins new VueLoaderPlugin()  PS: 引入方法 const { VueLoaderPlugin } = require('vue-loader')
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {}
+        use: [
+          {
+            loader: 'vue-loader',
+          }
+        ]
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader'
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['babel-preset-env']
+        }
+      },
+      {
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader']
       }
     ]
   },
