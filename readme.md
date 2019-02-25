@@ -31,7 +31,7 @@
   Document: 1.0 doing
 
 ##  文档
-- 见我的segmentfault 文章。
+- 见我的[segmentfault文章](https://segmentfault.com/a/1190000018265392) (https://segmentfault.com/a/1190000018265392)。
 
 - babel-loader Install
 
