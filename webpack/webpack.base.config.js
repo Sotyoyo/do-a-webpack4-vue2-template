@@ -25,7 +25,7 @@ module.exports = {
     path: ifProd ? config.prod.assetsPublcPath : config.dev.assetsPublcPath
   },
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: ['.js', '.vue', 'json'],
     alias: {
       "@": path.resolve (__dirname, "../src")
     }
@@ -43,10 +43,8 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['babel-preset-env']
-        }
+        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../test')],
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/,
